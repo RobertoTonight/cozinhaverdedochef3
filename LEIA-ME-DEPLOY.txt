@@ -1,0 +1,49 @@
+COZINHA VERDE PWA (VERSÃO 28) — GUIA DE PUBLICAÇÃO COM IA SEM CHAVE NO APP
+==========================================================================
+
+Este pacote contém o PWA completo e o proxy serverless pronto para
+VERCEL e NETLIFY, mantendo sua chave GEMINI_API_KEY protegida no servidor.
+
+ESTRUTURA DO PACOTE:
+- index.html                  -> Aplicativo PWA completo
+- manifest.json               -> Manifesto PWA (pronto para PWABuilder)
+- sw.js                       -> Service Worker v28 (Network-First + bypass /api/)
+- icons/                      -> Ícones 192px e 512px
+- api/gemini.js               -> Função proxy para Vercel (/api/gemini)
+- netlify/functions/gemini.js -> Função proxy para Netlify
+- netlify.toml                -> Redireciona /api/gemini -> Netlify Function
+- vercel.json                 -> Configuração de tempo limite e cache Vercel
+- package.json                -> Define Node.js 18+ (sem dependências externas)
+
+PASSO 1 — GERAR SUA CHAVE GRATUITA DO GEMINI
+1. Acesse https://aistudio.google.com
+2. Toque em "Get API key" -> "Create API key".
+3. Copie a chave (começa com AIza...).
+
+PASSO 2 — PUBLICAR COM FUNÇÃO SERVERLESS (VIA GITHUB)
+Obs.: O "Netlify Drop" (arrastar pasta) publica apenas arquivos estáticos
+e não ativa funções serverless. Para ativar o proxy /api/gemini:
+
+OPÇÃO A — VERCEL (mais rápida)
+1. Crie um repositório no GitHub (pode ser privado) e envie todos os arquivos
+   deste ZIP mantendo as pastas api/, netlify/ e icons/.
+2. Acesse https://vercel.com -> "Add New -> Project" e importe o repositório.
+3. Em "Environment Variables", adicione:
+   Name:  GEMINI_API_KEY
+   Value: (cole sua chave AIza...)
+4. Toque em "Deploy". Pronto! Seu endereço https://...vercel.app já terá
+   câmera ao vivo + IA visual + leitor de recibos funcionando sem pedir chave!
+
+OPÇÃO B — NETLIFY
+1. Crie um repositório no GitHub e envie todos os arquivos deste ZIP.
+2. Acesse https://app.netlify.com -> "Add new site" -> "Import an existing project".
+3. Conecte ao repositório. O arquivo netlify.toml configura tudo automaticamente.
+4. Em "Site configuration -> Environment variables", adicione:
+   Key:   GEMINI_API_KEY
+   Value: (cole sua chave AIza...)
+5. Faça um novo deploy (Deploys -> Trigger deploy).
+
+PASSO 3 — EMPACOTAR EM APK (PWABuilder)
+Depois de publicado em HTTPS na Vercel ou Netlify, cole a URL no PWABuilder
+para gerar o .apk. O aplicativo instalado continuará usando automaticamente o
+servidor /api/gemini sem expor a chave!

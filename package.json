@@ -1,0 +1,9 @@
+{
+  "name": "cozinha-verde-pwa",
+  "version": "28.0.0",
+  "private": true,
+  "description": "Cozinha Verde PWA com proxy serverless para IA Gemini (Vercel e Netlify)",
+  "engines": {
+    "node": ">=18"
+  }
+}
